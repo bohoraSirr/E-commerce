@@ -5,6 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 import { IoLogoTiktok } from "react-icons/io5";
 import { RiTwitterXLine } from "react-icons/ri";
 import "./Footer.css";
+import { FiPhoneCall } from "react-icons/fi";
 
 const Footer = () => {
   return (
@@ -138,7 +139,21 @@ const Footer = () => {
               <RiTwitterXLine className="w-5 h-5" />
             </a>
           </div>
+          <p className="text-gray-800 cursor-pointer slide-underline inline-block mb-2">
+            Call Us
+          </p>
+          <p>
+            <FiPhoneCall className="inline-block mr-2" />
+            +977 9848000000
+          </p>
         </div>
+      </div>
+
+      {/* Footer Bottom */}
+      <div className="container mx-auto mt-12 px-4 lg:px-0 border-t border-gray-200 pt-6">
+        <p className="text-gray-500 text-sm tracking-tighter text-center">
+          &copy; {new Date().getFullYear()} Innocent. All rights Reserved.
+        </p>
       </div>
     </footer>
   );
