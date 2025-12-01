@@ -1,0 +1,20 @@
+.slide-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.slide-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1f2937;
+  transition: width 0.3s ease;
+}
+
+.slide-underline:hover::after {
+  width: 100%;
+}
