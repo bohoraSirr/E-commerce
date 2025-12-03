@@ -139,7 +139,7 @@ const Footer = () => {
               <RiTwitterXLine className="w-5 h-5" />
             </a>
           </div>
-          <p className="text-gray-800 cursor-pointer slide-underline inline-block mb-2">
+          <p className="text-gray-800 cursor-pointer text-lg slide-underline inline-block mb-2">
             Call Us
           </p>
           <p>
