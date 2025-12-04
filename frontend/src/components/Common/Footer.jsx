@@ -15,7 +15,7 @@ const Footer = () => {
           <h3 className="text-lg text-gray-800 mb-4 cursor-pointer slide-underline">
             Newsletter
           </h3>
-          <p className="text-gray-500 mb-4">
+          <p className="text-gray-500 mb-4 ">
             Be the first one to know about new products, exclusive events ,and
             online offers.
           </p>
