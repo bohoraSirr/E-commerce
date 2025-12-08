@@ -100,7 +100,7 @@ const Footer = () => {
 
         {/* Follow Links */}
         <div className="group">
-          <h3 className="text-lg text-gray-800 mb-4 cursor-pointer slide-underline">
+          <h3 className="text-lg text-gray-800 mb-1.5 cursor-pointer slide-underline">
             Follow us
           </h3>
           <div className="flex items-center space-x-4 mb-6">
@@ -139,7 +139,7 @@ const Footer = () => {
               <RiTwitterXLine className="w-5 h-5" />
             </a>
           </div>
-          <p className="text-gray-800 cursor-pointer text-lg slide-underline inline-block mb-2">
+          <p className="text-gray-800 cursor-pointer text-lg slide-underline inline-block mb-0.5">
             Call Us
           </p>
           <p>
@@ -151,7 +151,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="container mx-auto mt-12 px-4 lg:px-0 border-t border-gray-200 pt-6">
-        <p className="text-gray-500 text-sm tracking-tighter text-center">
+        <p className="text-gray-500 text-md tracking-tighter text-center">
           &copy; {new Date().getFullYear()} Innocent. All rights Reserved.
         </p>
       </div>
