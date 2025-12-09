@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ProductGrid from "./ProductGrid";
 
 const selectedProduct = {
   name: "Hikking Boot",
@@ -10,6 +11,7 @@ const selectedProduct = {
   material: "Leather",
   sizes: [32, 33, 40, 42, 45],
   colors: ["Green", "Brown", "Black"],
+  quantity: 5,
   images: [
     {
       url: "https://picsum.photos/500/500?random=1",
@@ -22,7 +24,41 @@ const selectedProduct = {
   ],
 };
 
+const similarProducts = [
+  {
+    _id: 1,
+    name: "Product 1",
+    price: 300,
+    images: [{ url: "https://picsum.photos/500/500?random=3" }],
+  },
+  {
+    _id: 2,
+    name: "Product 2",
+    price: 200,
+    images: [{ url: "https://picsum.photos/500/500?random=4" }],
+  },
+  {
+    _id: 3,
+    name: "Product 3",
+    price: 150,
+    images: [{ url: "https://picsum.photos/500/500?random=5" }],
+  },
+  {
+    _id: 4,
+    name: "Product 4",
+    price: 500,
+    images: [{ url: "https://picsum.photos/500/500?random=6" }],
+  },
+];
+
 const ProductDetails = () => {
+  const [mainImage, setMainImage] = useState("");
+
+  useEffect(() => {
+    if (selectedProduct?.images?.length > 0) {
+      setMainImage(selectedProduct.images[0].url);
+    }
+  }, [selectedProduct]);
   return (
     <div className="p-6">
       <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg">
@@ -34,7 +70,8 @@ const ProductDetails = () => {
                 key={index}
                 src={image.url}
                 alt={image.altText || `Thumbnail ${index}`}
-                className="w-20 h-20 object-cover rounded-lg cursor-pointer border"
+                className={`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "border-black" : "border-gray-300"}`}
+                onClick={() => setMainImage(image.url)}
               />
             ))}
           </div>
@@ -43,8 +80,8 @@ const ProductDetails = () => {
           <div className="md:w-1/2">
             <div className="mb-4">
               <img
-                src={selectedProduct.images[0]?.url}
-                alt={selectedProduct.images[0]?.altText || selectedProduct.name}
+                src={mainImage}
+                alt="Main product"
                 className="w-full h-auto object-cover rounded-lg"
               />
             </div>
@@ -57,7 +94,10 @@ const ProductDetails = () => {
                 key={index}
                 src={image.url}
                 alt={image.altText || `Thumbnail ${index}`}
-                className="w-20 h-20 object-cover rounded-lg cursor-pointer border"
+                className={`w-20 h-20 object-cover rounded-lg cursor-pointer border ${mainImage === image.url ? "broder-black" : "border-gray-300"}`}
+                onClick={() => {
+                  setMainImage(image.url);
+                }}
               />
             ))}
           </div>
@@ -104,7 +144,47 @@ const ProductDetails = () => {
                 ))}
               </div>
             </div>
+            {/* For Quantity */}
+            <div className="mb-6">
+              <p className="text-gray-700 ">Quantity:</p>
+              <div className="flex items-center space-x-4 mt-2">
+                <button className="px-2 py-1 bg-gray-200 rounded text-lg">
+                  -
+                </button>
+                <span className="text-lg">1</span>
+                <button className="px-2 py-1 bg-gray-200 rounded text-lg">
+                  +
+                </button>
+              </div>
+            </div>
+            {/* Cart Button */}
+            <button className="bg-black text-white py-2 px-6 rounded w-full mb-4">
+              ADD TO CART
+            </button>
+
+            {/* Characteristics section */}
+            <div className="mt-10 text-gray-700">
+              <h3 className="text-lg font-bold mb-4">Characteristics:</h3>
+              <table className="w-full text-left text-sm text-gray-600">
+                <tbody>
+                  <tr>
+                    <td className="py-1">Brand</td>
+                    <td className="py-1">{selectedProduct.brand}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-1">Material</td>
+                    <td className="py-1">{selectedProduct.material}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+        </div>
+        <div className="mt-20">
+          <h2 className="text-2xl text-center font-medium mb-4">
+            You May Also Like
+          </h2>
+          <ProductGrid products={similarProducts} />
         </div>
       </div>
     </div>
