@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import ProductGrid from "./ProductGrid";
+import { toast } from "sonner";
 
 const selectedProduct = {
   name: "Hikking Boot",
@@ -53,12 +54,40 @@ const similarProducts = [
 
 const ProductDetails = () => {
   const [mainImage, setMainImage] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [isButtonDisabled, setISButtonDisabled] = useState(false);
 
   useEffect(() => {
     if (selectedProduct?.images?.length > 0) {
       setMainImage(selectedProduct.images[0].url);
     }
   }, [selectedProduct]);
+
+  const handleQuantityChange = (action) => {
+    if (action === "plus") setQuantity((prev) => prev + 1);
+    if (action === "minus" && quantity > 1) setQuantity((prev) => prev - 1);
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedColor && !selectedSize) {
+      toast.error("Please select a color and size before adding to cart..", {
+        duration: 1000,
+      });
+      return;
+    }
+    setISButtonDisabled(true);
+
+    setTimeout(() => {
+      (toast.success("Product added to cart."),
+        {
+          duration: 1000,
+        });
+      setISButtonDisabled(false);
+    }, 500);
+  };
+
   return (
     <div className="p-6">
       <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg">
@@ -117,6 +146,7 @@ const ProductDetails = () => {
               Rs {selectedProduct.price}
             </p>
             <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
+
             {/* For colors options */}
             <div className="mb-4">
               <p className="text-gray-700">Colors:</p>
@@ -124,7 +154,8 @@ const ProductDetails = () => {
                 {selectedProduct.colors.map((color) => (
                   <button
                     key={color}
-                    className="w-8 h-8 rounded-full border"
+                    onClick={() => setSelectedColor(color)}
+                    className={`w-8 h-8 rounded-full border ${selectedColor === color ? "border-black border-4" : "border-gray-300"}`}
                     style={{
                       backgroundColor: color.toLocaleLowerCase(),
                       filter: "brightness(0.7)",
@@ -133,35 +164,50 @@ const ProductDetails = () => {
                 ))}
               </div>
             </div>
+
             {/* For Sizes options */}
             <div className="mb-4">
               <p className="text-gray-700">Sizes:</p>
               <div className="flex gap-2 mt-2">
                 {selectedProduct.sizes.map((size) => (
-                  <button key={size} className="py-2 px-4 rounded border">
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`py-2 px-4 rounded border ${selectedSize === size ? "bg-black text-white" : "border-gray-300"}`}
+                  >
                     {size}
                   </button>
                 ))}
               </div>
             </div>
+
             {/* For Quantity */}
             <div className="mb-6">
               <p className="text-gray-700 ">Quantity:</p>
               <div className="flex items-center space-x-4 mt-2">
-                <button className="px-2 py-1 bg-gray-200 rounded text-lg">
+                <button
+                  onClick={() => handleQuantityChange("minus")}
+                  className="px-2 py-1 bg-gray-200 rounded text-lg"
+                >
                   -
                 </button>
-                <span className="text-lg">1</span>
-                <button className="px-2 py-1 bg-gray-200 rounded text-lg">
+                <span className="text-lg">{quantity}</span>
+                <button
+                  onClick={() => handleQuantityChange("plus")}
+                  className="px-2 py-1 bg-gray-200 rounded text-lg"
+                >
                   +
                 </button>
               </div>
             </div>
-            {/* Cart Button */}
-            <button className="bg-black text-white py-2 px-6 rounded w-full mb-4">
-              ADD TO CART
-            </button>
 
+            {/* Cart Button */}
+            <button
+              onClick={handleAddToCart}
+              className={`bg-black text-white py-2 px-6 rounded w-full mb-4 ${isButtonDisabled ? "cursor-not-allowed opacity-50" : "hover:bg-gray-900"}`}
+            >
+              {isButtonDisabled ? "Adding.." : "ADD TO CART"}
+            </button>
             {/* Characteristics section */}
             <div className="mt-10 text-gray-700">
               <h3 className="text-lg font-bold mb-4">Characteristics:</h3>
