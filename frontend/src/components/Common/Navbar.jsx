@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="container mx-auto flex items-center gap-4 py-4 px-6">
+      <nav className="w-full flex items-center gap-4 py-4 px-6">
         {/* Left - Logo */}
         <Link to="/" className="text-2xl font-medium">
           OneStop

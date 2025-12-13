@@ -10,7 +10,7 @@ const SearchBar = () => {
   };
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Search Term:", searchTerm);
+    console.log("Searching for:", searchBar); // Placeholder for search logic
     setIsOpen(false);
   };
   return (
@@ -21,7 +21,8 @@ const SearchBar = () => {
             <input
               type="text"
               placeholder="Search"
-              vlaue={searchBar}
+              value={searchBar}
+              onChange={(e) => setSearchBar(e.target.value)}
               className="bg-gray-100 px-4 py-5 pl-2 pr-12 rounded-lg focus:outline-none w-full placeholder:text-gray-700"
             />
             {/* Search Icon */}
@@ -32,7 +33,10 @@ const SearchBar = () => {
               <HiMiniMagnifyingGlass className="h-6 w-6" />
             </button>
             <button>
-              <HiMiniXMark className="h-6 w-6" />
+              <HiMiniXMark
+                className="h-6 w-6"
+                onClick={() => setIsOpen(false)}
+              />
             </button>
           </div>
         </form>
