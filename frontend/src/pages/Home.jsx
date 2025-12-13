@@ -5,6 +5,7 @@ import NewArrivals from "../components/Products/NewArrivals";
 import ProductDetails from "../components/Products/ProductDetails";
 import ProductGrid from "../components/Products/ProductGrid";
 import FeaturedProduct from "../components/Products/FeaturedProduct";
+import FeaturedSection from "../components/Products/FeaturedSection";
 
 const Home = () => {
   const placeholderProducts = [
@@ -78,6 +79,8 @@ const Home = () => {
 
       {/* Featured Product */}
       <FeaturedProduct />
+      {/* Featured Section */}
+      <FeaturedSection />
     </div>
   );
 };
